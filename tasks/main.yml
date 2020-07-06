@@ -30,6 +30,15 @@
       file:
         path: /etc/nginx/sites-enabled/default
         state: absent
+    - name: install smokeping configuration
+      template:
+        src: "{{ item }}.j2"
+        dest: "/etc/smokeping/config.d/{{ item }}"
+        owner: root
+        group: root
+        mode: 0644
+      with_items:
+        - Targets
     - name: start service
       systemd:
         name: "{{ item }}"

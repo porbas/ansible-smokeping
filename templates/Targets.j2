@@ -1,0 +1,29 @@
+# {{ ansible_managed }}
+
+*** Targets ***
+
+ # default probe
+probe = FPing
+
+menu = Top
+title = Network Latency Grapher
+remark = SmokePing for {{ sping_site_name }}.
+
++ {{ sping_site_name|replace(" ", "")|capitalize }}
+menu = {{ sping_site_name }}
+title = {{ sping_site_name }}
+
+{% for group in sping_groups|sort %}
+++ {{ group }}
+menu = {{ group }}
+title = {{ group }}
+
+{% for host in groups[group] %}
++++ {{ host }}
+host = {{ hostvars[host].ansible_ssh_host }}
+menu = {{ host }}
+title = {{ host }}
+# alerts = bigloss,someloss,startloss,rttdetect,hostdown
+alerts = someloss
+{% endfor %}
+{% endfor %}
