@@ -14,5 +14,5 @@ galaxy_info:
     - debian
     - smokeping
     - monitoring
-dependencies:
-  - pylabs.nginx
+# dependencies:
+#   - pylabs.nginx

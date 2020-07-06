@@ -5,10 +5,13 @@
       apt:
         name: "{{ packages }}"
         state: "latest"
+        update_cache: yes
+        cache_valid_time: "{{apt_cache_valid_time | default (3600)}}"
       vars:
         packages:
           - smokeping
           - fcgiwrap
+          - nginx
     - name: setup smokeping nginx config
       copy:
         src: "smokeping_nginx"
